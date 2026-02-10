@@ -12,7 +12,7 @@ configs = config_repo().list_config_names()
 def main(command, text):
     response = LLMHandler.run_request(command, text)
     logger.debug(response)
-    return response
+    print(response)
 
 
 if __name__ == "__main__":

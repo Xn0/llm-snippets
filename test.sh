@@ -9,9 +9,13 @@ output=$(
   { printf '%s\n' "No selection or clipboard content available" >&2; exit 1; }
 )
 
-# Convert to uppercase and copy to clipboard (regular clipboard).
-# Preserve content exactly except for case change.
-printf '%s' "$output" | tr '[:lower:]' '[:upper:]' | wl-copy
+# Run llm-snippets grammar check and copy result to clipboard.
+result=$(llm-snippets --command=eng_check --text="$output")
+printf '%s' "$result" | wl-copy
 
-#send system notification
-# TODO
+# Send notification based on result
+if [ -n "$result" ]; then
+  notify-send "LLM Snippets" "Success" --icon=dialog-information
+else
+  notify-send "LLM Snippets" "Error" --icon=dialog-error --urgency=critical
+fi

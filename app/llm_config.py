@@ -30,7 +30,6 @@ class ConfigRepo:
             return
         if conf_file.stem.startswith("_"):
             return
-        print(conf_file.__dir__)
         cls._configs[conf_file.stem] = PromptConfig(**_conf)
 
     @classmethod
