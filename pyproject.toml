@@ -15,3 +15,9 @@ dev = [
 
 [project.scripts]
 llm-snippets = "app.cli:main"
+
+[tool.setuptools]
+packages = ["app", "app.llms", "app.prompts"]
+
+[tool.setuptools.package-data]
+"app.prompts" = ["*.json"]

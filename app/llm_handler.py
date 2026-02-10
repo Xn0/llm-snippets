@@ -17,7 +17,11 @@ class LLMHandler:
         return AbstractLLM.registry[provider_name]
 
     @classmethod
-    def run_request(cls, prompt_name: str, text: str) -> str | None:
+    def run_request(cls, prompt_name: str, text: str) -> str:
         prompt_conf = config_repo().get_config(prompt_name)
+        if not prompt_conf:
+            return ""
         llm = cls._get_llm(prompt_conf.provider)
+        if not llm:
+            return ""
         return llm.generate(prompt_conf, text)

@@ -16,5 +16,5 @@ class AbstractLLM(ABC):
 
     @staticmethod
     @abstractmethod
-    def generate(self, prompt_config: PromptConfig, message: str) -> str | None:
+    def generate(prompt_config: PromptConfig, message: str) -> str:
         ...

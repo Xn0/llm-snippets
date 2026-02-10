@@ -5,11 +5,11 @@ from app.logger import logger
 from app.settings import settings
 from .abc_llm import AbstractLLM
 
-print("HERE")
+
 class AnthropicLLM(AbstractLLM, provider="anthropic"):
 
     @staticmethod
-    def generate(prompt_config: PromptConfig, message: str) -> str | None:
+    def generate(prompt_config: PromptConfig, message: str) -> str:
         try:
             client = Anthropic(api_key=settings.ANTHROPIC_API_KEY)
             response = client.messages.create(
@@ -27,3 +27,4 @@ class AnthropicLLM(AbstractLLM, provider="anthropic"):
             return response.content[0].text
         except Exception as e:
             logger.error(f"Anthropic {e=}")
+            return ""
